@@ -2,34 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map
+public class Map : MonoBehaviour
 {
-    private Vector2 offset;
-    private Vector2 lowerBounds;
-    private Vector2 upperBounds;
+    [SerializeField] private Vector2 mapGridOffset;
+    [SerializeField] private Vector2 playerSpawnPoint;
+    [SerializeField] private Vector2 lowerBounds;
+    [SerializeField] private Vector2 upperBounds;
 
-    public Map(Vector2 lowerBounds, Vector2 upperBounds, Vector2 offset)
-    {
-        this.lowerBounds = lowerBounds;
-        this.upperBounds = upperBounds;
-        this.offset = offset;
-    }
+    public Vector2 PlayerSpawnPoint => GridCoordToWorldPoint(playerSpawnPoint);
 
-    public bool IsInBounds(Vector2 gridPoint) 
-    {
-        Debug.Log("Bounds check: " + gridPoint);
-        return gridPoint.x >= lowerBounds.x && gridPoint.x <= upperBounds.x && gridPoint.y >= lowerBounds.y && gridPoint.y <= upperBounds.y;
-    }
+    public bool IsInBounds(Vector2 gridPoint) => gridPoint.x >= lowerBounds.x && gridPoint.x <= upperBounds.x && gridPoint.y >= lowerBounds.y && gridPoint.y <= upperBounds.y;
 
-    public Vector2 GridCoordToWorldPoint(Vector2 gridPoint)
-    {
-        Vector2 worldPoint = new Vector2(gridPoint.x + offset.x, gridPoint.y + offset.y);
-        Debug.Log("Grid: " + gridPoint + "World: " + worldPoint);
-        return worldPoint;
-    }
+    public Vector2 GridCoordToWorldPoint(Vector2 gridPoint) => new(gridPoint.x + mapGridOffset.x, gridPoint.y + mapGridOffset.y);
 
-    public Vector2 WorldPointToGridCoord(Vector2 worldPoint)
-    {
-        return new Vector2(worldPoint.x - offset.x, worldPoint.y - offset.y);
-    }
+    public Vector2 WorldPointToGridCoord(Vector2 worldPoint) => new(worldPoint.x - mapGridOffset.x, worldPoint.y - mapGridOffset.y);
 }
