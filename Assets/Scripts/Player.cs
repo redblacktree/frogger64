@@ -23,7 +23,8 @@ public class Player : Entity
         Input = Resources.Load<InputActionAsset>("InputActions");
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, StateMachine, "Move");        
+        MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        gameManager = GameManager.Instance;
     }
 
     protected override void Start()
@@ -43,6 +44,26 @@ public class Player : Entity
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
+        Vector2 moveDirection = Vector2.zero;
+
+        // find the maximum input value over 0.5 and set direction to that
+        if (Mathf.Abs(MoveInput.x) > 0.5f)
+        {
+            moveDirection.x = Mathf.Sign(MoveInput.x);
+        }
+        else if (Mathf.Abs(MoveInput.y) > 0.5f)
+        {
+            moveDirection.y = Mathf.Sign(MoveInput.y);
+        }
+
+        if (StateMachine.CurrentState != MoveState 
+            && moveDirection != Vector2.zero 
+            && gameManager.map.IsInBounds(GridPosition + moveDirection))
+        {
+            MoveState.TargetGridPosition = GridPosition + moveDirection;
+            MoveState.TargetWorldPosition = gameManager.map.GridCoordToWorldPoint(GridPosition + moveDirection);
+            StateMachine.ChangeState(MoveState);
+        }
     }
 
     public Vector2 GridPosition => gameManager.map.WorldPointToGridCoord(transform.position);

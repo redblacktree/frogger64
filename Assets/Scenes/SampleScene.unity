@@ -396,11 +396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 197959811260866216, guid: 2fd3b2d175480ec4a8fca3ad8afec808, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 197959811260866216, guid: 2fd3b2d175480ec4a8fca3ad8afec808, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -1.51
       objectReference: {fileID: 0}
     - target: {fileID: 197959811260866216, guid: 2fd3b2d175480ec4a8fca3ad8afec808, type: 3}
       propertyPath: m_LocalPosition.z
@@ -960,8 +960,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4027501645206012777, guid: 2fd3b2d175480ec4a8fca3ad8afec808, type: 3}
-  mapGridOffset: {x: 0.5, y: 0}
+  mapGridOffset: {x: 0, y: -0.5}
   playerSpawnPoint: {x: 0, y: -3}
+  lowerBounds: {x: -3, y: -3}
+  upperBounds: {x: 3, y: 4}
 --- !u!4 &1412410978
 Transform:
   m_ObjectHideFlags: 0

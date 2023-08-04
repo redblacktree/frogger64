@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerState
 {
-    private Vector2 targetSquare;
-    private Vector2 targetWorldPosition;
+    public Vector2 TargetWorldPosition;
+    public Vector2 TargetGridPosition;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -16,7 +16,7 @@ public class PlayerMoveState : PlayerState
     {        
         base.Enter();
 
-        FindTargetSquare();
+        Flip(TargetGridPosition - player.GridPosition);
     }
 
     public override void Exit()
@@ -28,40 +28,34 @@ public class PlayerMoveState : PlayerState
     {
         base.Update();
 
-        if (Vector2.Distance(player.transform.position, targetWorldPosition) > 0.01f)
+        if (Vector2.Distance(player.transform.position, TargetWorldPosition) > 0.01f)
         {
-            player.transform.position = Vector2.MoveTowards(player.transform.position, targetWorldPosition, player.moveSpeed * Time.deltaTime);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetWorldPosition, player.moveSpeed * Time.deltaTime);
         }
         else
         {
-            player.transform.position = targetWorldPosition;
+            player.transform.position = TargetWorldPosition;
             stateMachine.ChangeState(player.IdleState);
         }
     }
 
-    private void FindTargetSquare()
+    private void Flip(Vector2 direction)
     {
-        Vector2 targetSquare = Vector2.zero;
-
-        if (player.MoveInput.x > 0)
+        if (direction.x > 0)
         {
-            targetSquare = Vector2.right;
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
         }
-        else if (player.MoveInput.x < 0)
+        else if (direction.x < 0)
         {
-            targetSquare = Vector2.left;
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         }
-        else if (player.MoveInput.y > 0)
+        else if (direction.y > 0)
         {
-            targetSquare = Vector2.up;
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        else if (player.MoveInput.y < 0)
+        else if (direction.y < 0)
         {
-            targetSquare = Vector2.down;
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
         }
-
-        Vector2 playerGridPosition = player.GridPosition;
-        targetSquare += playerGridPosition;
-        targetWorldPosition = player.gameManager.map.GridCoordToWorldPoint(targetSquare);
     }
 }

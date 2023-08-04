@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class Map
 {
-    public int Width { get; private set; }
-    public int Height { get; private set; }
-    public int[,] Grid { get; private set; }
-
     private Vector2 offset;
+    private Vector2 lowerBounds;
+    private Vector2 upperBounds;
 
-    public Map(int width, int height, Vector2 offset)
+    public Map(Vector2 lowerBounds, Vector2 upperBounds, Vector2 offset)
     {
-        Width = width;
-        Height = height;
-        Grid = new int[width, height];        
+        this.lowerBounds = lowerBounds;
+        this.upperBounds = upperBounds;
+        this.offset = offset;
+    }
+
+    public bool IsInBounds(Vector2 gridPoint) 
+    {
+        Debug.Log("Bounds check: " + gridPoint);
+        return gridPoint.x >= lowerBounds.x && gridPoint.x <= upperBounds.x && gridPoint.y >= lowerBounds.y && gridPoint.y <= upperBounds.y;
     }
 
     public Vector2 GridCoordToWorldPoint(Vector2 gridPoint)
     {
-        return new Vector2(gridPoint.x + offset.x, gridPoint.y + offset.y);
+        Vector2 worldPoint = new Vector2(gridPoint.x + offset.x, gridPoint.y + offset.y);
+        Debug.Log("Grid: " + gridPoint + "World: " + worldPoint);
+        return worldPoint;
     }
 
     public Vector2 WorldPointToGridCoord(Vector2 worldPoint)
