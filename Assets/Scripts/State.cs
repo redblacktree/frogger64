@@ -30,4 +30,6 @@ public class State
     {
         entity.anim.SetBool(animBoolName, false);
     }
+
+    public virtual void AnimationFinished() { }
 }

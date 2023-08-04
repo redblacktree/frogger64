@@ -10,6 +10,7 @@ public class Player : Entity
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerDeathState DeathState { get; private set; }
 
     public InputActionAsset Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
@@ -24,6 +25,7 @@ public class Player : Entity
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        DeathState = new PlayerDeathState(this, StateMachine, "Death");
         gameManager = GameManager.Instance;
     }
 
@@ -39,6 +41,13 @@ public class Player : Entity
         base.Update();
 
         StateMachine.CurrentState.Update();        
+    }
+
+    public Vector2 GridPosition => gameManager.map.WorldPointToGridCoord(transform.position);
+
+    public void Die()
+    {
+        StateMachine.ChangeState(DeathState);
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -66,5 +75,8 @@ public class Player : Entity
         }
     }
 
-    public Vector2 GridPosition => gameManager.map.WorldPointToGridCoord(transform.position);
+    public void OnAnimationFinished()
+    {
+        StateMachine.CurrentState.AnimationFinished();
+    }
 }
