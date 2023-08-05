@@ -6,7 +6,6 @@ public class PlayerMoveState : PlayerState
 {
     public Vector2 TargetWorldPosition;
     public Vector2 TargetGridPosition;
-    public bool youreGonnaDie = false;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -20,7 +19,7 @@ public class PlayerMoveState : PlayerState
         Flip(TargetGridPosition - player.GridPosition);
         if (GameManager.Instance.map.IsDeadly(TargetGridPosition))
         {
-            youreGonnaDie = true;
+            player.GonnaDie = true;
         }
     }
 
@@ -43,7 +42,9 @@ public class PlayerMoveState : PlayerState
             stateMachine.ChangeState(player.IdleState);
         }
 
-        if (youreGonnaDie && Vector2.Distance(player.transform.position, TargetWorldPosition) < GameManager.Instance.MovementDeathDistance)
+        Debug.Log(player.GonnaDie);
+
+        if (player.GonnaDie && Vector2.Distance(player.transform.position, TargetWorldPosition) < GameManager.Instance.MovementDeathDistance)
         {
             stateMachine.ChangeState(player.DeathState);
         }

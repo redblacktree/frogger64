@@ -16,6 +16,7 @@ public class Player : Entity
     public Vector2 MoveInput { get; private set; }
 
     public GameManager gameManager;
+    public bool GonnaDie = false;
 
     protected override void Awake()
     {
