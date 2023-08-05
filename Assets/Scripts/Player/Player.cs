@@ -19,6 +19,7 @@ public class Player : Entity
     public GameManager gameManager;
     public bool GonnaDie = false;
     public bool HomeSafe = false;
+    public bool Riding = false;
 
     protected override void Awake()
     {
@@ -44,7 +45,12 @@ public class Player : Entity
     {
         base.Update();
 
-        StateMachine.CurrentState.Update();        
+        StateMachine.CurrentState.Update();
+
+        if (GameManager.Instance.map.IsInBounds(GridPosition) == false)
+        {
+            Die();
+        }
     }
 
     public Vector2 GridPosition => gameManager.map.WorldPointToGridCoord(transform.position);
@@ -70,8 +76,7 @@ public class Player : Entity
         }
 
         if (StateMachine.CurrentState == IdleState
-            && moveDirection != Vector2.zero 
-            && gameManager.map.IsInBounds(GridPosition + moveDirection))
+            && moveDirection != Vector2.zero)
         {
             MoveState.TargetGridPosition = GridPosition + moveDirection;
             MoveState.TargetWorldPosition = gameManager.map.GridCoordToWorldPoint(GridPosition + moveDirection);
