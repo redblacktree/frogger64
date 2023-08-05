@@ -14,17 +14,48 @@ public class Map : MonoBehaviour
     [SerializeField] private Vector2 lowerBounds;
     [SerializeField] private Vector2 upperBounds;
     [SerializeField] private Vector2[] deadlyObstacles;
+    [SerializeField] private Vector2[] winSquares;
+    public Vector2[] OccupiedWinSquares;
+
     [SerializeField] private bool drawGizmos = true;
+
+    private void Awake() {
+        OccupiedWinSquares = new Vector2[winSquares.Length];
+    }
 
     public Vector2 PlayerSpawnPoint => GridCoordToWorldPoint(playerSpawnPoint);
 
     public bool IsInBounds(Vector2 gridPoint) => gridPoint.x >= lowerBounds.x && gridPoint.x <= upperBounds.x && gridPoint.y >= lowerBounds.y && gridPoint.y <= upperBounds.y;
 
-    public bool IsDeadly(Vector2 gridPoint) => IsInBounds(gridPoint) && System.Array.Exists(deadlyObstacles, element => element == gridPoint);
+    public bool IsDeadly(Vector2 gridPoint) => IsInBounds(gridPoint) 
+        && (System.Array.Exists(deadlyObstacles, element => element == gridPoint) 
+            || IsOccupiedWinSquare(gridPoint));
+
+    public bool IsWinSquare(Vector2 gridPoint) => IsInBounds(gridPoint) 
+        && System.Array.Exists(winSquares, element => element == gridPoint) 
+        && !System.Array.Exists(OccupiedWinSquares, element => element == gridPoint);
+
+    public bool IsOccupiedWinSquare(Vector2 gridPoint) => IsInBounds(gridPoint) 
+        && System.Array.Exists(winSquares, element => element == gridPoint)
+        && System.Array.Exists(OccupiedWinSquares, element => element == gridPoint);
 
     public Vector2 GridCoordToWorldPoint(Vector2 gridPoint) => new(gridPoint.x + mapGridOffset.x, gridPoint.y + mapGridOffset.y);
 
     public Vector2 WorldPointToGridCoord(Vector2 worldPoint) => new(worldPoint.x - mapGridOffset.x, worldPoint.y - mapGridOffset.y);
+
+    public void Reset()
+    {
+        OccupiedWinSquares = new Vector2[winSquares.Length];
+    }
+
+    public void OccupyWinSquare(Vector2 gridPoint)
+    {
+        if (IsWinSquare(gridPoint))
+        {
+            int index = System.Array.IndexOf(winSquares, gridPoint);
+            OccupiedWinSquares[index] = gridPoint;
+        }
+    }
 
     private void OnDrawGizmos() {
         if (!drawGizmos) return;

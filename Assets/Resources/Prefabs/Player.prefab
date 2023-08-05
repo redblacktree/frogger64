@@ -258,6 +258,8 @@ MonoBehaviour:
     m_Bits: 0
   moveSpeed: 5
   gameManager: {fileID: 0}
+  GonnaDie: 0
+  GonnaWin: 0
 --- !u!50 &6293082310776370384
 Rigidbody2D:
   serializedVersion: 4

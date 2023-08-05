@@ -21,6 +21,11 @@ public class PlayerMoveState : PlayerState
         {
             player.GonnaDie = true;
         }
+        else if(GameManager.Instance.map.IsWinSquare(TargetGridPosition))
+        {
+            player.HomeSafe = true;
+            GameManager.Instance.map.OccupyWinSquare(TargetGridPosition);
+        }
     }
 
     public override void Exit()
@@ -39,10 +44,15 @@ public class PlayerMoveState : PlayerState
         else
         {
             player.transform.position = TargetWorldPosition;
-            stateMachine.ChangeState(player.IdleState);
+            if (player.HomeSafe)
+            {
+                stateMachine.ChangeState(player.WinState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.IdleState);
+            }
         }
-
-        Debug.Log(player.GonnaDie);
 
         if (player.GonnaDie && Vector2.Distance(player.transform.position, TargetWorldPosition) < GameManager.Instance.MovementDeathDistance)
         {

@@ -35,9 +35,12 @@ public class GameManager : MonoBehaviour
     {
         if (lives > 0)
         {
+            if (!Player.HomeSafe)
+            {
+                lives--;
+            }
             GameObject playerObject = Instantiate(playerPrefab, map.PlayerSpawnPoint, Quaternion.identity);
-            Player = playerObject.GetComponent<Player>();
-            lives--;
+            Player = playerObject.GetComponent<Player>();            
         }
         else
         {
@@ -47,13 +50,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RespawnPlayerCoroutine()
     {
-        yield return new WaitForSeconds(respawnTime);
+        var yieldFor = respawnTime;
+        if (Player.HomeSafe)
+        {
+            yieldFor = 0;
+        }
+        yield return new WaitForSeconds(yieldFor);
         SpawnPlayer();
     }
 
     public void RespawnPlayer()
     {
         Destroy(Player.gameObject);
+        StartCoroutine(RespawnPlayerCoroutine());
+    }
+
+    public void PlayerHome()
+    {
         StartCoroutine(RespawnPlayerCoroutine());
     }
 }
