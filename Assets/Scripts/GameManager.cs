@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject mobsParent;
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public Player Player { get; private set; }
 
+    private LevelData levelData;
     private int homeSquares = 3;
     private int froggersHome = 0;
 
@@ -31,8 +33,11 @@ public class GameManager : MonoBehaviour
     {
         GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
         Player = playerObject.GetComponent<Player>();
+        LoadLevel(1);
+        SpawnMobs();
     }
 
+    #region Player
     private void SpawnPlayer()
     {
         if (lives > 0)
@@ -76,5 +81,40 @@ public class GameManager : MonoBehaviour
             Debug.Log("You win!");
         }
         StartCoroutine(RespawnPlayerCoroutine());
+    }
+    #endregion
+
+    #region Level
+    private void SpawnMobs()
+    {
+        foreach (MobData mobData in levelData.Mobs)
+        {
+            StartCoroutine(SpawnCoroutine(mobData));            
+        }
+    }
+
+    private IEnumerator SpawnCoroutine(MobData mobData)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(mobData.SpawnFrequency);
+            SpawnMob(mobData);            
+        }        
+    }
+
+    private void SpawnMob(MobData mobData)
+    {
+        GameObject mobPrefab = Resources.Load<GameObject>($"Prefabs/{mobData.Type}");
+        GameObject mobObject = Instantiate(mobPrefab, mobsParent.transform);
+        mobObject.transform.position = mobData.SpawnPoint;
+        mobObject.GetComponent<Mob>().Speed = mobData.Speed;
+        mobObject.GetComponent<Mob>().MoveDirection = mobData.MoveDirection;
+    }
+    #endregion
+
+    public void LoadLevel(int level)
+    {
+        TextAsset jsonTextAsset = Resources.Load<TextAsset>($"Levels/Level{level}");
+        levelData = JsonUtility.FromJson<LevelData>(jsonTextAsset.text);
     }
 }

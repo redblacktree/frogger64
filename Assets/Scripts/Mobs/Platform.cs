@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Platform : Mob
 {
-    private void OnTriggerEnter2D(Collider2D other) 
+    protected override void OnTriggerEnter2D(Collider2D other) 
     {
+        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player hit platform: " + gameObject.name);
@@ -15,7 +16,8 @@ public class Platform : Mob
         }   
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    protected override void OnTriggerExit2D(Collider2D other) {
+        base.OnTriggerExit2D(other);
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();

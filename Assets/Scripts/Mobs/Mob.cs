@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class Mob : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private Vector2 direction = Vector2.right;
-    [SerializeField] private Vector2 size = Vector2.one;
+    public float Speed = 1f;
+    public int MoveDirection = 1;
+    public float SpawnFrequency = 1f;
+    public Vector2 size = Vector2.one;
 
     void Update()
+    {    
+        transform.Translate(new Vector2(MoveDirection * Speed * Time.deltaTime, 0f));
+
+        if (transform.position.x > 10f || transform.position.x < -10f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D other) 
     {
-        //transform.Translate(direction * moveSpeed * Time.deltaTime);
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D other) 
+    {
     }
 }
