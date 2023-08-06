@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
     [SerializeField] private float timeLimit = 30f;
@@ -12,8 +13,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public Map map;
     public Player Player { get; private set; }
+
+    private int homeSquares = 3;
+    private int froggersHome = 0;
 
     private void Awake()
     {
@@ -22,12 +25,11 @@ public class GameManager : MonoBehaviour
             Destroy(Instance.gameObject);
         }
         Instance = this;
-        map = GetComponentInChildren<Map>();
     }
 
     private void Start()
     {
-        GameObject playerObject = Instantiate(playerPrefab, map.PlayerSpawnPoint, Quaternion.identity);
+        GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
         Player = playerObject.GetComponent<Player>();
     }
 
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
             {
                 lives--;
             }
-            GameObject playerObject = Instantiate(playerPrefab, map.PlayerSpawnPoint, Quaternion.identity);
+            GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
             Player = playerObject.GetComponent<Player>();            
         }
         else
@@ -67,6 +69,12 @@ public class GameManager : MonoBehaviour
 
     public void PlayerHome()
     {
+        froggersHome++;
+        Player.Home();
+        if (froggersHome >= homeSquares)
+        {
+            Debug.Log("You win!");
+        }
         StartCoroutine(RespawnPlayerCoroutine());
     }
 }

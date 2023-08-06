@@ -16,7 +16,6 @@ public class PlayerHomeState : PlayerState
 
         // we don't want input to move this player entity anymore
         player.GetComponent<PlayerInput>().enabled = false;
-        GameManager.Instance.PlayerHome();
     }
     
     public override void Update() 

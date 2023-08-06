@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerState
 {
-    public Vector2 TargetWorldPosition;
-    public Vector2 TargetGridPosition;
+    public Vector2 TargetPosition;
+    public Vector2 Direction;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -16,16 +16,8 @@ public class PlayerMoveState : PlayerState
     {        
         base.Enter();
 
-        Flip(TargetGridPosition - player.GridPosition);
-        if (GameManager.Instance.map.IsDeadly(TargetGridPosition))
-        {
-            player.GonnaDie = true;
-        }
-        else if(GameManager.Instance.map.IsWinSquare(TargetGridPosition))
-        {
-            player.HomeSafe = true;
-            GameManager.Instance.map.OccupyWinSquare(TargetGridPosition);
-        }
+        TargetPosition = (Vector2)player.transform.position + Direction;
+        Flip(Direction);
     }
 
     public override void Exit()
@@ -37,26 +29,21 @@ public class PlayerMoveState : PlayerState
     {
         base.Update();
 
-        if (Vector2.Distance(player.transform.position, TargetWorldPosition) > 0.01f)
+        if (Vector2.Distance(player.transform.position, TargetPosition) > 0.01f)
         {
-            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetWorldPosition, player.moveSpeed * Time.deltaTime);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetPosition, player.moveSpeed * Time.deltaTime);
         }        
         else
         {
-            player.transform.position = TargetWorldPosition;
+            player.transform.position = TargetPosition;
             if (player.HomeSafe)
             {
-                stateMachine.ChangeState(player.WinState);
+                stateMachine.ChangeState(player.HomeState);
             }
             else
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-        }
-
-        if (player.GonnaDie && Vector2.Distance(player.transform.position, TargetWorldPosition) < GameManager.Instance.MovementDeathDistance)
-        {
-            stateMachine.ChangeState(player.DeathState);
         }
     }
 

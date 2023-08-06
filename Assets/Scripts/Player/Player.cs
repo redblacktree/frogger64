@@ -11,13 +11,12 @@ public class Player : Entity
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerDeathState DeathState { get; private set; }
-    public PlayerHomeState WinState { get; private set; }
+    public PlayerHomeState HomeState { get; private set; }
 
     public InputActionAsset Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
     public GameManager gameManager;
-    public bool GonnaDie = false;
     public bool HomeSafe = false;
     public bool Riding = false;
 
@@ -30,7 +29,7 @@ public class Player : Entity
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
         DeathState = new PlayerDeathState(this, StateMachine, "Death");
-        WinState = new PlayerHomeState(this, StateMachine, "Home");
+        HomeState = new PlayerHomeState(this, StateMachine, "Home");
         gameManager = GameManager.Instance;
     }
 
@@ -46,18 +45,16 @@ public class Player : Entity
         base.Update();
 
         StateMachine.CurrentState.Update();
-
-        if (GameManager.Instance.map.IsInBounds(GridPosition) == false)
-        {
-            Die();
-        }
     }
-
-    public Vector2 GridPosition => gameManager.map.WorldPointToGridCoord(transform.position);
 
     public void Die()
     {
         StateMachine.ChangeState(DeathState);
+    }
+
+    public void Home()
+    {
+        StateMachine.ChangeState(HomeState);
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -74,12 +71,11 @@ public class Player : Entity
         {
             moveDirection.y = Mathf.Sign(MoveInput.y);
         }
+        MoveState.Direction = moveDirection;
 
         if (StateMachine.CurrentState == IdleState
             && moveDirection != Vector2.zero)
         {
-            MoveState.TargetGridPosition = GridPosition + moveDirection;
-            MoveState.TargetWorldPosition = gameManager.map.GridCoordToWorldPoint(GridPosition + moveDirection);
             StateMachine.ChangeState(MoveState);
         }
     }
