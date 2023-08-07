@@ -14,7 +14,7 @@ TagManager:
   - Platforms
   - Hazards
   - Player
-  - 
+  - PixelUI
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2756489459
+    locked: 0
+  - name: PixelUI
+    uniqueID: 608217287
     locked: 0

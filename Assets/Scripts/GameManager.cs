@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
-    [SerializeField] private float timeLimit = 30f;
+    public float TimeLimit = 30f;    
     public float MovementDeathDistance = 0.5f;
 
     public static GameManager Instance;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private LevelData levelData;
     private int homeSquares = 3;
     private int froggersHome = 0;
+    public float TimeRemaining = 0f;
 
     private void Awake()
     {
@@ -31,10 +32,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
-        Player = playerObject.GetComponent<Player>();
+        SpawnPlayer();
         LoadLevel(1);
         SpawnMobs();
+    }
+
+    private void Update()
+    {
+        TimeRemaining -= Time.deltaTime;
+        if (TimeRemaining <= 0)
+        {
+            Player.Die();
+        }
     }
 
     #region Player
@@ -42,12 +51,13 @@ public class GameManager : MonoBehaviour
     {
         if (lives > 0)
         {
+            GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
+            Player = playerObject.GetComponent<Player>();
+            TimeRemaining = TimeLimit;
             if (!Player.HomeSafe)
             {
                 lives--;
             }
-            GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
-            Player = playerObject.GetComponent<Player>();            
         }
         else
         {

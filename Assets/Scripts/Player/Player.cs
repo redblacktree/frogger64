@@ -49,7 +49,10 @@ public class Player : Entity
 
     public void Die()
     {
-        StateMachine.ChangeState(DeathState);
+        if (StateMachine.CurrentState != DeathState)
+        {
+            StateMachine.ChangeState(DeathState);
+        }
     }
 
     public void Home()
