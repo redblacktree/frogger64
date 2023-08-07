@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
-    public float TimeLimit = 30f;    
-    public float MovementDeathDistance = 0.5f;
+    public float TimeLimit = 30f;
 
     public static GameManager Instance;
 

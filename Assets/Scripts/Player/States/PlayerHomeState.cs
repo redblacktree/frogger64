@@ -18,7 +18,7 @@ public class PlayerHomeState : PlayerState
         player.GetComponent<PlayerInput>().enabled = false;
 
         // center the player on the home square
-        player.transform.position = new Vector2(Mathf.RoundToInt(player.transform.position.x), 3.5f);
+        player.transform.position = new Vector2(Mathf.RoundToInt(player.transform.position.x) + 0.5f, 3.5f);
     }
     
     public override void Update() 
