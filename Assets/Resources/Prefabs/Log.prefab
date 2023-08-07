@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9, y: 0.8}
+  m_Size: {x: 2.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &4337717517315998631
 MonoBehaviour:
@@ -93,8 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ca41d9bb69fa143b2ecd53e72c2251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  direction: {x: 1, y: 0}
+  Speed: 1
+  MoveDirection: 1
+  SpawnFrequency: 1
   size: {x: 3, y: 1}
 --- !u!1 &4249293429973424825
 GameObject:

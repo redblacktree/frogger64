@@ -258,8 +258,8 @@ MonoBehaviour:
     m_Bits: 0
   moveSpeed: 5
   gameManager: {fileID: 0}
-  GonnaDie: 0
-  GonnaWin: 0
+  HomeSafe: 0
+  Riding: 0
 --- !u!50 &6293082310776370384
 Rigidbody2D:
   serializedVersion: 4
@@ -316,7 +316,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

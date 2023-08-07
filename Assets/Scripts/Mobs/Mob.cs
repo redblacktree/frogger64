@@ -26,4 +26,8 @@ public class Mob : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D other) 
     {
     }
+
+    protected virtual void OnTriggerStay2D(Collider2D other) 
+    {
+    }
 }

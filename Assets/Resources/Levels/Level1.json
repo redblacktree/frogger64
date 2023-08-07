@@ -2,13 +2,53 @@
     "Mobs": [
         {
             "Type": "Log",
-            "SpawnFrequency": 4,
+            "SpawnFrequency": 6,
             "SpawnPoint": {
                 "x": 9,
                 "y": 1.5
             },            
             "Speed": 1.0,
             "MoveDirection": -1
+        },
+        {
+            "Type": "Log",
+            "SpawnFrequency": 8,
+            "SpawnPoint": {
+                "x": -9,
+                "y": 2.5
+            },            
+            "Speed": 1.0,
+            "MoveDirection": 1
+        },
+        {
+            "Type": "Log",
+            "SpawnFrequency": -1,
+            "SpawnPoint": {
+                "x": 0,
+                "y": 2.5
+            },            
+            "Speed": 1.0,
+            "MoveDirection": 1
+        },
+        {
+            "Type": "Log",
+            "SpawnFrequency": -1,
+            "SpawnPoint": {
+                "x": 2,
+                "y": 1.5
+            },            
+            "Speed": 1.0,
+            "MoveDirection": -1
+        },
+        {
+            "Type": "Log",
+            "SpawnFrequency": -1,
+            "SpawnPoint": {
+                "x": 5,
+                "y": 2.5
+            },            
+            "Speed": 1.0,
+            "MoveDirection": 1
         }
     ]
 }

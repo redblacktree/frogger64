@@ -97,8 +97,15 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(mobData.SpawnFrequency);
-            SpawnMob(mobData);            
+            SpawnMob(mobData);
+            if (mobData.SpawnFrequency > 0)
+            {
+                yield return new WaitForSeconds(mobData.SpawnFrequency);                
+            }
+            else
+            {
+                break;
+            }            
         }        
     }
 
