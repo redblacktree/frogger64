@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject mobsParent;
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
+    public List<Vector2> HomeSquareLocations = new List<Vector2>();
     [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
     public float TimeLimit = 30f;
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
         Player.Home();
         if (froggersHome >= homeSquares)
         {
-            Debug.Log("You win!");
+            LoadLevel(1);
         }
         StartCoroutine(RespawnPlayerCoroutine());
     }
@@ -128,9 +129,25 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public void ResetLevel()
+    {
+        foreach (Transform child in mobsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        // destroy all player objects
+        foreach (Player player in FindObjectsOfType<Player>())
+        {
+            Destroy(player.gameObject);
+        }     
+    }
+
     public void LoadLevel(int level)
     {
         TextAsset jsonTextAsset = Resources.Load<TextAsset>($"Levels/Level{level}");
         levelData = JsonUtility.FromJson<LevelData>(jsonTextAsset.text);
+        ResetLevel();
+        SpawnMobs();
+        SpawnPlayer();
     }
 }

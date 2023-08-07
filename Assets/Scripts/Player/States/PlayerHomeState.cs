@@ -18,7 +18,25 @@ public class PlayerHomeState : PlayerState
         player.GetComponent<PlayerInput>().enabled = false;
 
         // center the player on the home square
-        player.transform.position = new Vector2(Mathf.RoundToInt(player.transform.position.x) + 0.5f, 3.5f);
+        player.transform.position = FindNearestHomeSquare(player.transform.position);
+    }
+
+    private Vector2 FindNearestHomeSquare(Vector2 position)
+    {
+        Vector2 nearest = Vector2.zero;
+        float distance = Mathf.Infinity;
+
+        foreach (Vector2 homeSquare in GameManager.Instance.HomeSquareLocations)
+        {
+            float newDistance = Vector2.Distance(position, homeSquare);
+            if (newDistance < distance)
+            {
+                distance = newDistance;
+                nearest = homeSquare;
+            }
+        }
+
+        return nearest;
     }
     
     public override void Update() 
