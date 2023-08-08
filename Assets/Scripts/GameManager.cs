@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private ScoreDisplay highScoreDisplay;
 
+    [Header("Scoring Events")]
+    public int ScorePerHomeSquare = 50;
+    public int ScorePerJumpForward = 10;
+    public int ScoreForSavingGirlfriend = 200;
+    public int ScoreForEatingFly = 200;
+    public int ScorePerSecondRemaining = 10;
+
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     public List<Vector2> HomeSquareLocations = new List<Vector2>();
     public int Lives = 6;
@@ -49,6 +56,17 @@ public class GameManager : MonoBehaviour
             Player.Die();
         }
     }
+
+    #region Score
+    public void AddScore(int score)
+    {
+        scoreDisplay.UpdateScore(scoreDisplay.Score + score);
+        if (scoreDisplay.Score > highScoreDisplay.Score)
+        {
+            highScoreDisplay.UpdateScore(scoreDisplay.Score);
+        }
+    }
+    #endregion
 
     #region Player
     private void SpawnPlayer()
@@ -129,8 +147,7 @@ public class GameManager : MonoBehaviour
         mobObject.GetComponent<Mob>().Speed = mobData.Speed;
         mobObject.GetComponent<Mob>().MoveDirection = mobData.MoveDirection;
     }
-    #endregion
-
+    
     public void ResetLevel()
     {
         TimeRemaining = TimeLimit;
@@ -154,4 +171,5 @@ public class GameManager : MonoBehaviour
         SpawnMobs();
         SpawnPlayer();
     }
+    #endregion
 }

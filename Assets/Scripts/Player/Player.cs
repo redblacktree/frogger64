@@ -20,6 +20,7 @@ public class Player : Entity
     public bool HomeSafe = false;
     public bool Riding = false;
     public bool Destroying = false;
+    private int jumpsForward = 0;
 
     protected override void Awake()
     {
@@ -37,7 +38,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-
+        
         StateMachine.Initialize(IdleState);
     }
 
@@ -87,8 +88,21 @@ public class Player : Entity
         if (StateMachine.CurrentState == IdleState
             && moveDirection != Vector2.zero)
         {
+            if (moveDirection == Vector2.up)
+            {
+                if (CurrentRow() > jumpsForward)
+                {
+                    jumpsForward++;
+                    GameManager.Instance.AddScore(GameManager.Instance.ScorePerJumpForward);
+                }
+            }
             StateMachine.ChangeState(MoveState);
         }
+    }
+
+    private int CurrentRow()
+    {
+        return Mathf.RoundToInt(transform.position.y + 4.5f);
     }
 
     public void OnAnimationFinished()

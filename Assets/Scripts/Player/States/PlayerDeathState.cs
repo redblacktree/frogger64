@@ -12,7 +12,9 @@ public class PlayerDeathState : PlayerState
     {
         base.Enter();
 
+        player.transform.rotation = Quaternion.identity;
         player.rb.velocity = Vector2.zero;
+        player.col.enabled = false;
     }
     
     public override void Update() 
@@ -29,6 +31,7 @@ public class PlayerDeathState : PlayerState
     {
         base.AnimationFinished();
 
+        player.Destroy();
         GameManager.Instance.RespawnPlayer();
     }
 }

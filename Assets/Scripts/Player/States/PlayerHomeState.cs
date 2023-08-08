@@ -19,6 +19,9 @@ public class PlayerHomeState : PlayerState
 
         // center the player on the home square
         player.transform.position = FindNearestHomeSquare(player.transform.position);
+
+        GameManager.Instance.AddScore(GameManager.Instance.ScorePerHomeSquare);
+        GameManager.Instance.AddScore(GameManager.Instance.ScorePerSecondRemaining * (int)GameManager.Instance.TimeRemaining);
     }
 
     private Vector2 FindNearestHomeSquare(Vector2 position)

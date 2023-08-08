@@ -20,7 +20,6 @@ public class ScoreDisplay : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        Debug.Log("UpdateScore: " + score);
         Score = score;
         foreach (Transform child in transform)
         {
