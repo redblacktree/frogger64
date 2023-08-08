@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject mobsParent;
+    [SerializeField] private GameObject livesDisplay;
+
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     public List<Vector2> HomeSquareLocations = new List<Vector2>();
-    [SerializeField] private int lives = 6;
+    public int Lives = 6;
     [SerializeField] private float respawnTime = 2f;
     public float TimeLimit = 30f;
 
@@ -32,9 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnPlayer();
         LoadLevel(1);
-        SpawnMobs();
     }
 
     private void Update()
@@ -49,15 +49,12 @@ public class GameManager : MonoBehaviour
     #region Player
     private void SpawnPlayer()
     {
-        if (lives > 0)
+        if (Lives > 0)
         {
             GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
             Player = playerObject.GetComponent<Player>();
-            TimeRemaining = TimeLimit;
-            if (!Player.HomeSafe)
-            {
-                lives--;
-            }
+            TimeRemaining = TimeLimit;            
+            livesDisplay.GetComponent<LivesDisplay>().UpdateLives(Lives);
         }
         else
         {
@@ -78,7 +75,6 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        Destroy(Player.gameObject);
         StartCoroutine(RespawnPlayerCoroutine());
     }
 
@@ -88,9 +84,11 @@ public class GameManager : MonoBehaviour
         Player.Home();
         if (froggersHome >= homeSquares)
         {
-            LoadLevel(1);
+            LoadLevel(1);            
         }
-        StartCoroutine(RespawnPlayerCoroutine());
+        else{
+            StartCoroutine(RespawnPlayerCoroutine());
+        }
     }
     #endregion
 
@@ -131,6 +129,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        TimeRemaining = TimeLimit;
+        froggersHome = 0;
         foreach (Transform child in mobsParent.transform)
         {
             Destroy(child.gameObject);
@@ -138,8 +138,8 @@ public class GameManager : MonoBehaviour
         // destroy all player objects
         foreach (Player player in FindObjectsOfType<Player>())
         {
-            Destroy(player.gameObject);
-        }     
+            player.Destroy();
+        }
     }
 
     public void LoadLevel(int level)

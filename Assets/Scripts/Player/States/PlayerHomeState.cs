@@ -38,14 +38,4 @@ public class PlayerHomeState : PlayerState
 
         return nearest;
     }
-    
-    public override void Update() 
-    {
-        base.Update();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();        
-    }
 }

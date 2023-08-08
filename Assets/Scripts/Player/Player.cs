@@ -19,6 +19,7 @@ public class Player : Entity
     public GameManager gameManager;
     public bool HomeSafe = false;
     public bool Riding = false;
+    public bool Destroying = false;
 
     protected override void Awake()
     {
@@ -51,8 +52,15 @@ public class Player : Entity
     {
         if (StateMachine.CurrentState != DeathState)
         {
+            GameManager.Instance.Lives--;
             StateMachine.ChangeState(DeathState);
         }
+    }
+
+    public void Destroy()
+    {
+        Destroying = true;
+        Destroy(gameObject);
     }
 
     public void Home()

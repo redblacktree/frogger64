@@ -9,7 +9,10 @@ public class Map : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            player.Die();
+            if (!player.Destroying)
+            {
+                player.Die();
+            }
         }
     }
 }
