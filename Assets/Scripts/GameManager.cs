@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject mobsParent;
-    [SerializeField] private GameObject livesDisplay;
+    [SerializeField] private LivesDisplay livesDisplay;
+    [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private ScoreDisplay highScoreDisplay;
 
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     public List<Vector2> HomeSquareLocations = new List<Vector2>();
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadLevel(1);
+        scoreDisplay.UpdateScore(0);
+        highScoreDisplay.UpdateScore(0);
     }
 
     private void Update()
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviour
             GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
             Player = playerObject.GetComponent<Player>();
             TimeRemaining = TimeLimit;            
-            livesDisplay.GetComponent<LivesDisplay>().UpdateLives(Lives);
+            livesDisplay.UpdateLives(Lives);
         }
         else
         {
