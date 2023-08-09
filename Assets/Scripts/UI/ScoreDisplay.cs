@@ -14,7 +14,7 @@ public class ScoreDisplay : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            scoreNumberPrefabs.Add(i.ToString()[0], Resources.Load<GameObject>("Prefabs/Score" + i));
+            scoreNumberPrefabs.Add(i.ToString()[0], Resources.Load<GameObject>("Prefabs/number" + i));
         }
     }
 

@@ -298,6 +298,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: letters-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 5
+        height: 7
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c75aef37070f034fa25f78d7402849d
+      internalID: -2132793767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: letters-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 5
+        height: 7
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac5f3d88eecd4c24abafdc9211a208a8
+      internalID: -96994977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: letters-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 0
+        width: 5
+        height: 7
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a118c5964d7f5479c2e3d4ed1897e7
+      internalID: -315704115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -311,6 +374,8 @@ TextureImporter:
     nameFileIdTable:
       letters-Sheet_0: 1775901548
       letters-Sheet_1: 1273529747
+      letters-Sheet_10: -96994977
+      letters-Sheet_11: -315704115
       letters-Sheet_2: -2116982344
       letters-Sheet_3: 1302319377
       letters-Sheet_4: -2011831673
@@ -318,6 +383,7 @@ TextureImporter:
       letters-Sheet_6: -88244189
       letters-Sheet_7: 1773759250
       letters-Sheet_8: -126494360
+      letters-Sheet_9: -2132793767
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

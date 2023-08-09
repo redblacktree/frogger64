@@ -21,7 +21,9 @@ public class PlayerHomeState : PlayerState
         player.transform.position = FindNearestHomeSquare(player.transform.position);
 
         GameManager.Instance.AddScore(GameManager.Instance.ScorePerHomeSquare);
-        GameManager.Instance.AddScore(GameManager.Instance.ScorePerSecondRemaining * (int)GameManager.Instance.TimeRemaining);
+        int timeRemaining = (int)GameManager.Instance.TimeRemaining;
+        GameManager.Instance.AddScore(GameManager.Instance.ScorePerSecondRemaining * timeRemaining);
+        GameManager.Instance.DisplayMessage("TIME " + timeRemaining, 1f);
     }
 
     private Vector2 FindNearestHomeSquare(Vector2 position)

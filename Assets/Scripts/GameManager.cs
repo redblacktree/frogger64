@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LivesDisplay livesDisplay;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private ScoreDisplay highScoreDisplay;
+    [SerializeField] private MessageDisplay messageDisplay;
 
     [Header("Scoring Events")]
     public int ScorePerHomeSquare = 50;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         LoadLevel(1);
         scoreDisplay.UpdateScore(0);
         highScoreDisplay.UpdateScore(0);
+        DisplayMessage("start", 1f);
     }
 
     private void Update()
@@ -55,6 +57,11 @@ public class GameManager : MonoBehaviour
         {
             Player.Die();
         }
+    }
+
+    public void DisplayMessage(string message, float duration)
+    {
+        messageDisplay.DisplayMessage(message, duration);
     }
 
     #region Score
@@ -156,6 +163,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        StopAllCoroutines();
         // destroy all player objects
         foreach (Player player in FindObjectsOfType<Player>())
         {
