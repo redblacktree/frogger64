@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour
         mobObject.transform.position = mobData.SpawnPoint;
         mobObject.GetComponent<Mob>().Speed = mobData.Speed;
         mobObject.GetComponent<Mob>().MoveDirection = mobData.MoveDirection;
+        mobObject.GetComponent<Mob>().Dives = mobData.Dives;
     }
     
     public void ResetLevel()

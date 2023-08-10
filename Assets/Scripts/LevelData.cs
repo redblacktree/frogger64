@@ -17,4 +17,5 @@ public class MobData
     public Vector2 SpawnPoint;
     public float Speed;
     public int MoveDirection;
+    public bool Dives;
 }

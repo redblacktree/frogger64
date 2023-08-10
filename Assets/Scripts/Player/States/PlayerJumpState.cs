@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : PlayerState
+public class PlayerJumpState : PlayerState
 {
     public Vector2 TargetPosition;
     public Vector2 Direction;
 
-    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
     }
@@ -16,6 +16,7 @@ public class PlayerMoveState : PlayerState
     {        
         base.Enter();
 
+        player.Jumping = true;
         TargetPosition = (Vector2)player.transform.position + Direction;
         Flip(Direction);
     }
@@ -23,6 +24,8 @@ public class PlayerMoveState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        player.Jumping = false;
     }
 
     public override void Update()
@@ -31,7 +34,7 @@ public class PlayerMoveState : PlayerState
 
         if (Vector2.Distance(player.transform.position, TargetPosition) > 0.01f)
         {
-            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetPosition, player.moveSpeed * Time.deltaTime);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetPosition, player.jumpSpeed * Time.deltaTime);
         }        
         else
         {

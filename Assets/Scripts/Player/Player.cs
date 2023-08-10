@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    public float moveSpeed = 5f;
+    public float jumpSpeed = 5f;
 
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
-    public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
     public PlayerDeathState DeathState { get; private set; }
     public PlayerHomeState HomeState { get; private set; }
 
@@ -19,6 +19,7 @@ public class Player : Entity
     public GameManager gameManager;
     public bool HomeSafe = false;
     public bool Riding = false;
+    public bool Jumping = false;
     public bool Destroying = false;
     private int jumpsForward = 0;
 
@@ -29,7 +30,7 @@ public class Player : Entity
         Input = Resources.Load<InputActionAsset>("InputActions");
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         DeathState = new PlayerDeathState(this, StateMachine, "Death");
         HomeState = new PlayerHomeState(this, StateMachine, "Home");
         gameManager = GameManager.Instance;
@@ -83,7 +84,7 @@ public class Player : Entity
         {
             moveDirection.y = Mathf.Sign(MoveInput.y);
         }
-        MoveState.Direction = moveDirection;
+        JumpState.Direction = moveDirection;
 
         if (StateMachine.CurrentState == IdleState
             && moveDirection != Vector2.zero)
@@ -96,7 +97,7 @@ public class Player : Entity
                     GameManager.Instance.AddScore(GameManager.Instance.ScorePerJumpForward);
                 }
             }
-            StateMachine.ChangeState(MoveState);
+            StateMachine.ChangeState(JumpState);
         }
     }
 

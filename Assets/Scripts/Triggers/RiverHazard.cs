@@ -9,7 +9,7 @@ public class Hazard : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (!player.Riding)
+            if (!player.Riding && !player.Jumping)
             {
                 player.Die();
             }

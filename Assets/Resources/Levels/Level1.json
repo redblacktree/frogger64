@@ -1,12 +1,23 @@
 {
     "Mobs": [
         {
-            "Type": "Log",
+            "Type": "TurtleGroup",
             "SpawnFrequency": 6,
             "SpawnPoint": {
-                "x": 9,
+                "x": 7,
                 "y": 1.5
             },            
+            "Speed": 1.0,
+            "MoveDirection": -1
+        },
+        {
+            "Type": "TurtleGroup",
+            "SpawnFrequency": 6,
+            "SpawnPoint": {
+                "x": 13,
+                "y": 1.5
+            },
+            "Dives": true,   
             "Speed": 1.0,
             "MoveDirection": -1
         },
@@ -31,10 +42,10 @@
             "MoveDirection": 1
         },
         {
-            "Type": "Log",
+            "Type": "TurtleGroup",
             "SpawnFrequency": -1,
             "SpawnPoint": {
-                "x": 2,
+                "x": 1,
                 "y": 1.5
             },            
             "Speed": 1.0,
