@@ -18,7 +18,7 @@ public class PlayerJumpState : PlayerState
 
         player.Jumping = true;
         TargetPosition = (Vector2)player.transform.position + Direction;
-        Flip(Direction);
+        player.Flip(Direction);
     }
 
     public override void Exit()
@@ -47,26 +47,6 @@ public class PlayerJumpState : PlayerState
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-        }
-    }
-
-    private void Flip(Vector2 direction)
-    {
-        if (direction.x > 0)
-        {
-            player.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
-        }
-        else if (direction.x < 0)
-        {
-            player.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        }
-        else if (direction.y > 0)
-        {
-            player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else if (direction.y < 0)
-        {
-            player.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
         }
     }
 }

@@ -46,7 +46,6 @@ public class TurtleIdleState : State
 
         if (timeToDive)
         {
-            Debug.Log("Turtle Diving");
             turtle.StateMachine.ChangeState(turtle.diveState);
         }
     }

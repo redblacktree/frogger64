@@ -7,7 +7,6 @@ public class Mob : Entity
     public float Speed = 1f;
     public int MoveDirection = 1;
     public float SpawnFrequency = 1f;
-    public Vector2 size = Vector2.one;
     public bool Dives = false;
     
     protected override void Update()

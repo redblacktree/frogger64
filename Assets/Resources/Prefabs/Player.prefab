@@ -135,7 +135,7 @@ GameObject:
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -256,10 +256,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  moveSpeed: 5
+  jumpSpeed: 5
   gameManager: {fileID: 0}
   HomeSafe: 0
   Riding: 0
+  Jumping: 0
+  Destroying: 0
 --- !u!50 &6293082310776370384
 Rigidbody2D:
   serializedVersion: 4
@@ -330,5 +332,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0

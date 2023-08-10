@@ -37,7 +37,6 @@ public class TurtleDiveState : State
     {
         base.AnimationFinished();
 
-        Debug.Log("Turtle Dive Animation Finished");
         turtle.StateMachine.ChangeState(turtle.idleState);
     }
 }

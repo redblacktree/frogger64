@@ -26,4 +26,36 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void Update() {}
+
+    public virtual void Flip(Vector2 direction)
+    {
+        if (direction.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+        }
+        else if (direction.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        }
+        else if (direction.y > 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else if (direction.y < 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+    }
+
+    public virtual void FlipSprite(Vector2 direction)
+    {
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
 }

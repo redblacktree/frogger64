@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Platforms
-  - Hazards
+  - Cars
   - Player
   - PixelUI
   - 
@@ -47,7 +47,7 @@ TagManager:
   - name: Platforms
     uniqueID: 3060296343
     locked: 0
-  - name: Hazards
+  - name: Cars
     uniqueID: 3852183889
     locked: 0
   - name: Player

@@ -14,6 +14,7 @@ public class PlayerHomeState : PlayerState
     {
         base.Enter();
 
+        Debug.Log("PlayerHomeState: Enter()");
         // we don't want input to move this player entity anymore
         player.GetComponent<PlayerInput>().enabled = false;
 
