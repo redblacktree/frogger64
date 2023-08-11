@@ -19,19 +19,18 @@ public class GameManager : MonoBehaviour
     public int ScorePerSecondRemaining = 10;
 
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
-    public List<Vector2> HomeSquareLocations = new List<Vector2>();
+    public List<HomeSquare> HomeSquares = new List<HomeSquare>();
     public int Lives = 6;
     [SerializeField] private float respawnTime = 2f;
+    [SerializeField] private float newLevelLoadDelay = 2f;
     public float TimeLimit = 30f;
 
     public static GameManager Instance;
 
     public Player Player { get; private set; }
-
-    private LevelData levelData;
-    private int homeSquares = 3;
-    private int froggersHome = 0;
+    private LevelData levelData;    
     public float TimeRemaining = 0f;
+    private bool TimerStopped = false;
 
     private void Awake()
     {
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
         LoadLevel(1);
         scoreDisplay.UpdateScore(0);
         highScoreDisplay.UpdateScore(0);
@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (TimerStopped) return;
+
         TimeRemaining -= Time.deltaTime;
         if (TimeRemaining <= 0)
         {
@@ -82,7 +84,8 @@ public class GameManager : MonoBehaviour
         {
             GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
             Player = playerObject.GetComponent<Player>();
-            TimeRemaining = TimeLimit;            
+            TimeRemaining = TimeLimit;
+            TimerStopped = false;       
             livesDisplay.UpdateLives(Lives);
         }
         else
@@ -109,11 +112,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerHome()
     {
-        froggersHome++;
         Player.Home();
-        if (froggersHome >= homeSquares)
+        TimerStopped = true;
+        if (FroggersHome >= HomeSquares.Count)
         {
-            LoadLevel(1);            
+            StartCoroutine(LoadNextLevelCoroutine());
         }
         else{
             StartCoroutine(RespawnPlayerCoroutine());
@@ -122,6 +125,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Level
+    public int FroggersHome => HomeSquares.FindAll(h => h.Occupied).Count;
+
     private void SpawnMobs()
     {
         foreach (MobData mobData in levelData.Mobs)
@@ -159,7 +164,7 @@ public class GameManager : MonoBehaviour
     public void ResetLevel()
     {
         TimeRemaining = TimeLimit;
-        froggersHome = 0;
+        HomeSquares.ForEach(h => h.Reset());
         foreach (Transform child in mobsParent.transform)
         {
             Destroy(child.gameObject);
@@ -170,6 +175,12 @@ public class GameManager : MonoBehaviour
         {
             player.Destroy();
         }
+    }
+
+    public IEnumerator LoadNextLevelCoroutine()
+    {
+        yield return new WaitForSeconds(newLevelLoadDelay);
+        LoadLevel(1); // TODO: Replace hard-coded level number
     }
 
     public void LoadLevel(int level)

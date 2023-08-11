@@ -14,27 +14,29 @@ public class PlayerHomeState : PlayerState
     {
         base.Enter();
 
-        Debug.Log("PlayerHomeState: Enter()");
         // we don't want input to move this player entity anymore
         player.GetComponent<PlayerInput>().enabled = false;
 
         // center the player on the home square
-        player.transform.position = FindNearestHomeSquare(player.transform.position);
+        HomeSquare homeSquare = FindNearestHomeSquare(player.transform.position);
+        player.transform.position = homeSquare.HomeLocation;
+        homeSquare.Occupy();
 
+        // score
         GameManager.Instance.AddScore(GameManager.Instance.ScorePerHomeSquare);
         int timeRemaining = (int)GameManager.Instance.TimeRemaining;
         GameManager.Instance.AddScore(GameManager.Instance.ScorePerSecondRemaining * timeRemaining);
         GameManager.Instance.DisplayMessage("TIME " + timeRemaining, 1f);
     }
 
-    private Vector2 FindNearestHomeSquare(Vector2 position)
+    private HomeSquare FindNearestHomeSquare(Vector2 position)
     {
-        Vector2 nearest = Vector2.zero;
+        HomeSquare nearest = GameManager.Instance.HomeSquares[0];
         float distance = Mathf.Infinity;
 
-        foreach (Vector2 homeSquare in GameManager.Instance.HomeSquareLocations)
+        foreach (HomeSquare homeSquare in GameManager.Instance.HomeSquares)
         {
-            float newDistance = Vector2.Distance(position, homeSquare);
+            float newDistance = Vector2.Distance(position, homeSquare.HomeLocation);
             if (newDistance < distance)
             {
                 distance = newDistance;
