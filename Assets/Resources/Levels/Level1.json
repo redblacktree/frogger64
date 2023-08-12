@@ -5,7 +5,7 @@
             "Mobs": [
                 {
                     "Type": "Log",
-                    "SpawnDelay": 8
+                    "Spacing": 8
                 }
             ]
         },
@@ -14,11 +14,11 @@
             "Mobs": [
                 {
                     "Type": "TurtleGroup",
-                    "SpawnDelay": 4.5
+                    "Spacing": 6
                 },
                 {
                     "Type": "TurtleGroup",
-                    "SpawnDelay": 4.5,
+                    "Spacing": 6,
                     "Dives": true
                 }
             ]
@@ -28,7 +28,7 @@
             "Mobs": [
                 {
                     "Type": "PinkCar",
-                    "SpawnDelay": 4
+                    "Spacing": 6
                 }
             ]
         },
@@ -37,11 +37,11 @@
             "Mobs": [
                 {
                     "Type": "WhiteRaceCar",
-                    "SpawnDelay": 5.5
+                    "Spacing": 2
                 },
                 {
                     "Type": "WhiteRaceCar",
-                    "SpawnDelay": 1
+                    "Spacing": 11
                 }
             ]
         },
@@ -50,7 +50,7 @@
             "Mobs": [
                 {
                     "Type": "StreetSweeper",
-                    "SpawnDelay": 7
+                    "Spacing": 5.5
                 }
             ]
         }

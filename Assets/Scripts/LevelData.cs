@@ -20,6 +20,6 @@ public class SpawnerData
 public class MobData
 {
     public string Type;
-    public float SpawnDelay;        
+    public float Spacing;        
     public bool Dives;
 }
