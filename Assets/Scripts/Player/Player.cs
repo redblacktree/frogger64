@@ -54,7 +54,6 @@ public class Player : Entity
     {
         if (StateMachine.CurrentState != DeathState)
         {
-            GameManager.Instance.Lives--;
             StateMachine.ChangeState(DeathState);
         }
     }

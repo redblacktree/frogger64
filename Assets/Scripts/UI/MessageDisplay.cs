@@ -7,7 +7,7 @@ public class MessageDisplay : MonoBehaviour
     [SerializeField] private GameObject MessageBackground;
     [SerializeField] private float letterSpacing = 0.5f;    
 
-    private List<char> availableLetters = new List<char>() {'A', 'C', 'E', 'H', 'I', 'M', 'O', 'P', 'R', 'S', 'T', 'U'};
+    private List<char> availableLetters = new List<char>() {'A', 'C', 'E', 'G', 'H', 'I', 'M', 'O', 'P', 'R', 'S', 'T', 'U', 'V'};
     private List<char> availableNumbers = new List<char>() {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private Dictionary<char, GameObject> characterPrefabs = new Dictionary<char, GameObject>();
     private const float onePixel = 0.125f;

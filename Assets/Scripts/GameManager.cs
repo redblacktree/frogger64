@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private LivesDisplay livesDisplay;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private ScoreDisplay highScoreDisplay;
     [SerializeField] private MessageDisplay messageDisplay;
+    public List<HomeSquare> HomeSquares = new List<HomeSquare>();
+    public List<Spawner> Spawners = new List<Spawner>();
+
+    [Header("Transition Settings")]
+    [SerializeField] private float newLevelLoadDelay = 2f;
+    [SerializeField] private float gameOverDelay = 5f;
 
     [Header("Scoring Events")]
     public int ScorePerHomeSquare = 50;
@@ -17,20 +24,21 @@ public class GameManager : MonoBehaviour
     public int ScoreForEatingFly = 200;
     public int ScorePerSecondRemaining = 10;
 
+    [Header("Player Data")]
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
-    public List<HomeSquare> HomeSquares = new List<HomeSquare>();
-    public List<Spawner> Spawners = new List<Spawner>();
-    public int Lives = 6;
+    [SerializeField] private int lives = 6;
     [SerializeField] private float respawnTime = 2f;
-    [SerializeField] private float newLevelLoadDelay = 2f;
     public float TimeLimit = 30f;
 
     public static GameManager Instance;
 
     public Player Player { get; private set; }
     private LevelData levelData;    
-    public float TimeRemaining = 0f;
+    public float TimeRemaining { get; private set; } = 0f;
     private bool TimerStopped = false;
+    private int livesRemaining  = 0;
+    private int score = 0;
+    private int highScore = 4630;
 
     private void Awake()
     {
@@ -39,6 +47,7 @@ public class GameManager : MonoBehaviour
             Destroy(Instance.gameObject);
         }
         Instance = this;
+        livesRemaining = lives;
     }
 
     private void Start()
@@ -68,29 +77,23 @@ public class GameManager : MonoBehaviour
     #region Score
     public void AddScore(int score)
     {
-        scoreDisplay.UpdateScore(scoreDisplay.Score + score);
-        if (scoreDisplay.Score > highScoreDisplay.Score)
+        this.score += score;
+        if (this.score > highScore)
         {
-            highScoreDisplay.UpdateScore(scoreDisplay.Score);
+            highScore = this.score;
         }
+        scoreDisplay.UpdateScore(this.score);
+        highScoreDisplay.UpdateScore(highScore);
     }
     #endregion
 
     #region Player
     private void SpawnPlayer()
     {
-        if (Lives > 0)
-        {
-            GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
-            Player = playerObject.GetComponent<Player>();
-            TimeRemaining = TimeLimit;
-            TimerStopped = false;       
-            livesDisplay.UpdateLives(Lives);
-        }
-        else
-        {
-            Debug.Log("Game Over");
-        }        
+        GameObject playerObject = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
+        Player = playerObject.GetComponent<Player>();
+        TimeRemaining = TimeLimit;
+        TimerStopped = false;       
     }
 
     private IEnumerator RespawnPlayerCoroutine()
@@ -119,6 +122,20 @@ public class GameManager : MonoBehaviour
         }
         else{
             StartCoroutine(RespawnPlayerCoroutine());
+        }
+    }
+
+    public void PlayerDied()
+    {
+        livesRemaining--;
+        livesDisplay.UpdateLives(livesRemaining);
+        if (livesRemaining > 0)
+        {
+            SpawnPlayer();
+        }
+        else
+        {
+            StartCoroutine(GameOverCoroutine());
         }
     }
     #endregion
@@ -152,6 +169,16 @@ public class GameManager : MonoBehaviour
         Spawners.ForEach(s => s.LoadLevelData(levelData.Spawners[s.SpawnerIndex]));
         ResetLevel();
         SpawnPlayer();
+    }
+
+    private IEnumerator GameOverCoroutine()
+    {
+        DisplayMessage("game over", gameOverDelay);
+        TimerStopped = true;
+        yield return new WaitForSeconds(gameOverDelay);
+        this.score = 0;
+        scoreDisplay.UpdateScore(this.score);
+        LoadLevel(1);
     }
     #endregion
 }

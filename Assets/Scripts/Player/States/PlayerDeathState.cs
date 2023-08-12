@@ -32,6 +32,6 @@ public class PlayerDeathState : PlayerState
         base.AnimationFinished();
 
         player.Destroy();
-        GameManager.Instance.RespawnPlayer();
+        GameManager.Instance.PlayerDied();
     }
 }

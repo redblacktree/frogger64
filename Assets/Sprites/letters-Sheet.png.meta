@@ -361,6 +361,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: letters-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 5
+        height: 7
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc23566098a6b704cba59feeddbe1973
+      internalID: 926761083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: letters-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 5
+        height: 7
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faf72c10818809e4c87761e78d891d44
+      internalID: -553811249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -376,6 +418,8 @@ TextureImporter:
       letters-Sheet_1: 1273529747
       letters-Sheet_10: -96994977
       letters-Sheet_11: -315704115
+      letters-Sheet_12: 926761083
+      letters-Sheet_13: -553811249
       letters-Sheet_2: -2116982344
       letters-Sheet_3: 1302319377
       letters-Sheet_4: -2011831673
