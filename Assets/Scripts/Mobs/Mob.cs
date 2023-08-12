@@ -6,7 +6,6 @@ public class Mob : Entity
 {
     public float Speed = 1f;
     public int MoveDirection = 1;
-    public float SpawnFrequency = 1f;
     public bool Dives = false;
     
     protected override void Update()
@@ -18,12 +17,6 @@ public class Mob : Entity
         {
             Destroy(this.gameObject);
         }
-    }
-
-    public void Initialize(MobData mobData)
-    {
-        Speed = mobData.Speed;
-        MoveDirection = mobData.MoveDirection;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other) 

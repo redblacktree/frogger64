@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject mobsParent;
     [SerializeField] private LivesDisplay livesDisplay;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private ScoreDisplay highScoreDisplay;
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     public List<HomeSquare> HomeSquares = new List<HomeSquare>();
+    public List<Spawner> Spawners = new List<Spawner>();
     public int Lives = 6;
     [SerializeField] private float respawnTime = 2f;
     [SerializeField] private float newLevelLoadDelay = 2f;
@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         LoadLevel(1);
         scoreDisplay.UpdateScore(0);
         highScoreDisplay.UpdateScore(0);
@@ -127,48 +126,11 @@ public class GameManager : MonoBehaviour
     #region Level
     public int FroggersHome => HomeSquares.FindAll(h => h.Occupied).Count;
 
-    private void SpawnMobs()
-    {
-        foreach (MobData mobData in levelData.Mobs)
-        {
-            StartCoroutine(SpawnCoroutine(mobData));            
-        }
-    }
-
-    private IEnumerator SpawnCoroutine(MobData mobData)
-    {
-        while(true)
-        {
-            SpawnMob(mobData);
-            if (mobData.SpawnFrequency > 0)
-            {
-                yield return new WaitForSeconds(mobData.SpawnFrequency);                
-            }
-            else
-            {
-                break;
-            }            
-        }        
-    }
-
-    private void SpawnMob(MobData mobData)
-    {
-        GameObject mobPrefab = Resources.Load<GameObject>($"Prefabs/{mobData.Type}");
-        GameObject mobObject = Instantiate(mobPrefab, mobsParent.transform);
-        mobObject.transform.position = mobData.SpawnPoint;
-        mobObject.GetComponent<Mob>().Speed = mobData.Speed;
-        mobObject.GetComponent<Mob>().MoveDirection = mobData.MoveDirection;
-        mobObject.GetComponent<Mob>().Dives = mobData.Dives;
-    }
-    
     public void ResetLevel()
     {
         TimeRemaining = TimeLimit;
         HomeSquares.ForEach(h => h.Reset());
-        foreach (Transform child in mobsParent.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        Spawners.ForEach(s => s.ResetSpawner());
         StopAllCoroutines();
         // destroy all player objects
         foreach (Player player in FindObjectsOfType<Player>())
@@ -187,8 +149,8 @@ public class GameManager : MonoBehaviour
     {
         TextAsset jsonTextAsset = Resources.Load<TextAsset>($"Levels/Level{level}");
         levelData = JsonUtility.FromJson<LevelData>(jsonTextAsset.text);
+        Spawners.ForEach(s => s.LoadLevelData(levelData.Spawners[s.SpawnerIndex]));
         ResetLevel();
-        SpawnMobs();
         SpawnPlayer();
     }
     #endregion

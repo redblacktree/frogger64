@@ -1,145 +1,58 @@
 {
-    "Mobs": [
+    "Spawners": [
         {
-            "Type": "TurtleGroup",
-            "SpawnFrequency": 6,
-            "SpawnPoint": {
-                "x": 7,
-                "y": 1.5
-            },            
             "Speed": 1.0,
-            "MoveDirection": -1
+            "Mobs": [
+                {
+                    "Type": "Log",
+                    "SpawnDelay": 8
+                }
+            ]
         },
         {
-            "Type": "TurtleGroup",
-            "SpawnFrequency": 6,
-            "SpawnPoint": {
-                "x": 13,
-                "y": 1.5
-            },
-            "Dives": true,   
-            "Speed": 1.0,
-            "MoveDirection": -1
-        },
-        {
-            "Type": "Log",
-            "SpawnFrequency": 8,
-            "SpawnPoint": {
-                "x": -9,
-                "y": 2.5
-            },            
-            "Speed": 1.0,
-            "MoveDirection": 1
-        },
-        {
-            "Type": "Log",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": 0,
-                "y": 2.5
-            },            
-            "Speed": 1.0,
-            "MoveDirection": 1
-        },
-        {
-            "Type": "TurtleGroup",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": 1,
-                "y": 1.5
-            },            
-            "Speed": 1.0,
-            "MoveDirection": -1
-        },
-        {
-            "Type": "Log",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": 5,
-                "y": 2.5
-            },            
-            "Speed": 1.0,
-            "MoveDirection": 1
-        },
-        {
-            "Type": "PinkCar",
-            "SpawnFrequency": 4,
-            "SpawnPoint": {
-                "x": 8.5,
-                "y": -0.5
-            },
             "Speed": 1.5,
-            "MoveDirection": -1
-        },        
-        {
-            "Type": "PinkCar",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": -3.5,
-                "y": -0.5
-            },
-            "Speed": 1.5,
-            "MoveDirection": -1
+            "Mobs": [
+                {
+                    "Type": "TurtleGroup",
+                    "SpawnDelay": 4.5
+                },
+                {
+                    "Type": "TurtleGroup",
+                    "SpawnDelay": 4.5,
+                    "Dives": true
+                }
+            ]
         },
         {
-            "Type": "PinkCar",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": 2.5,
-                "y": -0.5
-            },
             "Speed": 1.5,
-            "MoveDirection": -1
+            "Mobs": [
+                {
+                    "Type": "PinkCar",
+                    "SpawnDelay": 4
+                }
+            ]
         },
         {
-            "Type": "WhiteRaceCar",
-            "SpawnFrequency": 5.5,
-            "SpawnPoint": {
-                "x": -10,
-                "y": -1.5
-            },
             "Speed": 2,
-            "MoveDirection": 1
+            "Mobs": [
+                {
+                    "Type": "WhiteRaceCar",
+                    "SpawnDelay": 5.5
+                },
+                {
+                    "Type": "WhiteRaceCar",
+                    "SpawnDelay": 1
+                }
+            ]
         },
         {
-            "Type": "WhiteRaceCar",
-            "SpawnFrequency": 5.5,
-            "SpawnPoint": {
-                "x": -8,
-                "y": -1.5
-            },
-            "Speed": 2,
-            "MoveDirection": 1
-        },
-        {
-            "Type": "StreetSweeper",
-            "SpawnFrequency": 7,
-            "SpawnPoint": {
-                "x": 7.25,
-                "y": -2.5
-            },
             "Speed": 0.75,
-            "MoveDirection": -1
-        },
-        {
-            "Type": "StreetSweeper",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": -3.25,
-                "y": -2.5
-            },
-            "Speed": 0.75,
-            "MoveDirection": -1
-        },
-        {
-            "Type": "StreetSweeper",
-            "SpawnFrequency": -1,
-            "SpawnPoint": {
-                "x": 2,
-                "y": -2.5
-            },
-            "Speed": 0.75,
-            "MoveDirection": -1
+            "Mobs": [
+                {
+                    "Type": "StreetSweeper",
+                    "SpawnDelay": 7
+                }
+            ]
         }
     ]
 }

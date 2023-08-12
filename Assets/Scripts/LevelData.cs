@@ -6,16 +6,20 @@ using UnityEngine;
 public class LevelData
 {
     public int LevelNumber;
+    public List<SpawnerData> Spawners;
+}
+
+[System.Serializable]
+public class SpawnerData
+{
     public List<MobData> Mobs;
+    public float Speed;
 }
 
 [System.Serializable]
 public class MobData
 {
     public string Type;
-    public float SpawnFrequency;
-    public Vector2 SpawnPoint;
-    public float Speed;
-    public int MoveDirection;
+    public float SpawnDelay;        
     public bool Dives;
 }
