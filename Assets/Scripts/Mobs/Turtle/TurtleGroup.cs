@@ -21,5 +21,8 @@ public class TurtleGroup : Mob
             turtle.MoveDirection = this.MoveDirection;
             turtle.Dives = this.Dives;
         }
+
+        // HACK: Undo double flip
+        FlipSprite(new Vector2(-MoveDirection, 0));
     }
 }

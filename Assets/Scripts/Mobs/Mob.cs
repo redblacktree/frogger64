@@ -7,7 +7,15 @@ public class Mob : Entity
     public float Speed = 1f;
     public int MoveDirection = 1;
     public bool Dives = false;
-    
+
+    protected override void Start()
+    {
+        base.Start();
+
+        Debug.Log($"Mob Start {gameObject.name} MoveDirection {MoveDirection}");
+        FlipSprite(new Vector2(MoveDirection, 0));
+    }
+
     protected override void Update()
     {    
         base.Update();

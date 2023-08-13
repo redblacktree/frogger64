@@ -7,8 +7,6 @@ public class Car : Mob
     protected override void Start()
     {
         base.Start();
-        
-        FlipSprite(new Vector2(MoveDirection, 0));
     }
 
     protected override void OnTriggerStay2D(Collider2D other) 
