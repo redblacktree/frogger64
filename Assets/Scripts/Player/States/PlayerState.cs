@@ -25,6 +25,6 @@ public class PlayerState : State
 
     public override void Exit()
     {
-        base.Exit();        
+        base.Exit();
     }
 }

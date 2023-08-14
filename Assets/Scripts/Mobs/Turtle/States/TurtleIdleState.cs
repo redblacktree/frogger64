@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurtleIdleState : State
 {
     private Turtle turtle;
-    public float FloatTime = 5f;
+    private float FloatTime = 5f;
 
     private bool timeToDive = false;
 
