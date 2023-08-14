@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(1);
         scoreDisplay.UpdateScore(0);
-        highScoreDisplay.UpdateScore(0);
+        highScoreDisplay.UpdateScore(highScore);
         DisplayMessage("start", 1f);
     }
 
