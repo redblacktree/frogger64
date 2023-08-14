@@ -14,6 +14,14 @@ public class PlayerHomeState : PlayerState
     {
         base.Enter();
 
+        // Remove any girlfriends that might be attached, and score them
+        var girlfriend = player.GetComponentInChildren<Girlfriend>();
+        if (girlfriend != null)
+        {
+            GameManager.Instance.AddScore(GameManager.Instance.ScoreForSavingGirlfriend);
+            GameObject.Destroy(girlfriend.gameObject);
+        }
+
         // we don't want input to move this player entity anymore
         player.GetComponent<PlayerInput>().enabled = false;
 

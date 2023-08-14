@@ -9,6 +9,7 @@ public class Girlfriend : Entity
     public GirlfriendIdleState IdleState { get; private set; }
     public GirlfriendJumpState JumpState { get; private set; }
     public GirlfriendTurnState TurnState { get; private set; }
+    public GirlfriendRidingState RidingState { get; private set; }
 
     public float JumpSpeed = 5f;
 
@@ -18,7 +19,8 @@ public class Girlfriend : Entity
         StateMachine = new GirlfriendStateMachine();
         IdleState = new GirlfriendIdleState(this, StateMachine, "Idle");    
         JumpState = new GirlfriendJumpState(this, StateMachine, "Jump");
-        TurnState = new GirlfriendTurnState(this, StateMachine, "Turn");        
+        TurnState = new GirlfriendTurnState(this, StateMachine, "Idle");        
+        RidingState = new GirlfriendRidingState(this, StateMachine, "Idle");
     }
 
     protected override void Start()
@@ -57,10 +59,20 @@ public class Girlfriend : Entity
         }
     }
 
+    private void HopOnPlayersBack(GameObject player)
+    {
+        transform.parent = player.transform;
+        transform.localPosition = new Vector3(0, -0.125f, 0);
+        transform.localRotation = player.transform.rotation;
+        StopAllCoroutines();
+        StateMachine.ChangeState(RidingState);
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Girlfriend Collided with Player");
+            HopOnPlayersBack(other.gameObject);
         }
     }
 }
