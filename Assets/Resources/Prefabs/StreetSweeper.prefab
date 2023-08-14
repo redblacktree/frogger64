@@ -64,9 +64,13 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3178542805834993994, guid: b72d0750777badd499bf29fc4745d823, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4657586006010460121, guid: b72d0750777badd499bf29fc4745d823, type: 3}
       propertyPath: m_Name
-      value: StreetSweeper Variant
+      value: StreetSweeper
       objectReference: {fileID: 0}
     - target: {fileID: 4657586006010460121, guid: b72d0750777badd499bf29fc4745d823, type: 3}
       propertyPath: m_IsActive
