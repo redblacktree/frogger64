@@ -1262,7 +1262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 608217287
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -3156,12 +3156,6 @@ MonoBehaviour:
   scoreDisplay: {fileID: 46884731}
   highScoreDisplay: {fileID: 123989580}
   messageDisplay: {fileID: 281097229}
-  ScorePerHomeSquare: 50
-  ScorePerJumpForward: 10
-  ScoreForSavingGirlfriend: 200
-  ScoreForEatingFly: 200
-  ScorePerSecondRemaining: 10
-  playerSpawnPoint: {x: -0.5, y: -3.5}
   HomeSquares:
   - {fileID: 808288474}
   - {fileID: 771189771}
@@ -3172,11 +3166,17 @@ MonoBehaviour:
   - {fileID: 428722156}
   - {fileID: 243043163}
   - {fileID: 1466845226}
-  Lives: 7
-  respawnTime: 2
   newLevelLoadDelay: 2
+  gameOverDelay: 5
+  ScorePerHomeSquare: 50
+  ScorePerJumpForward: 10
+  ScoreForSavingGirlfriend: 200
+  ScoreForEatingFly: 200
+  ScorePerSecondRemaining: 10
+  playerSpawnPoint: {x: -0.5, y: -3.5}
+  lives: 7
+  respawnTime: 2
   TimeLimit: 30
-  TimeRemaining: 0
 --- !u!4 &1412410978
 Transform:
   m_ObjectHideFlags: 0
