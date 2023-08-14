@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3979080312691348251}
   - component: {fileID: 7390997068848272231}
   - component: {fileID: 8809422158741010148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: -8435807198646731122}
   - component: {fileID: 6293082310776370384}
   - component: {fileID: 8459673387495564355}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -256,7 +256,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  jumpSpeed: 5
+  JumpSpeed: 5
   gameManager: {fileID: 0}
   HomeSafe: 0
   Riding: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1895962116094520507}
   - component: {fileID: 2744607388572097058}
   - component: {fileID: 3074112274163749979}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 2796397382450749862}
   - component: {fileID: 6248200284550978487}
   - component: {fileID: -3111294942502080861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,8 +170,6 @@ MonoBehaviour:
     m_Bits: 0
   Speed: 1
   MoveDirection: 1
-  SpawnFrequency: 1
-  size: {x: 1, y: 1}
   Dives: 0
   timeFloating: 3
 --- !u!61 &-3111294942502080861

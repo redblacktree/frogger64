@@ -16,23 +16,15 @@ public class GirlfriendJumpState : State
     {
         base.Enter();
 
-        Debug.Log("Jump State Enter");
-
         TargetPosition = (Vector2)girlfriend.transform.localPosition + girlfriend.FacingDirection;
-        Debug.Log("Target Position: " + TargetPosition);
-        Debug.Log("Girlfriend Position: " + girlfriend.transform.localPosition);
     }
     
     public override void Update() 
     {
         base.Update();
 
-        Debug.Log("Update");
-
-        Debug.Log(Vector2.Distance(girlfriend.transform.localPosition, TargetPosition));
-        if (Vector2.Distance(girlfriend.transform.localPosition, TargetPosition) > 0.01f)
+        if (Vector2.Distance(girlfriend.transform.localPosition, TargetPosition) > 0.1f)
         {
-            Debug.Log("Move Towards Target Position");
             girlfriend.transform.localPosition = Vector2.MoveTowards(girlfriend.transform.localPosition, TargetPosition, girlfriend.JumpSpeed * Time.deltaTime);
         }        
         else

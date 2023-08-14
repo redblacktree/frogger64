@@ -5,7 +5,7 @@ using UnityEngine;
 public class GirlfriendIdleState : State
 {
     private Girlfriend girlfriend;
-    private float idleTime = 1f;
+    private float idleTime = 2f;
 
     public GirlfriendIdleState(Girlfriend girlfriend, StateMachine stateMachine, string animBoolName) : base(girlfriend, stateMachine, animBoolName)
     {

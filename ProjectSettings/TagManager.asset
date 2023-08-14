@@ -14,8 +14,8 @@ TagManager:
   - Platforms
   - Cars
   - Player
+  - Girlfriend
   - PixelUI
-  - 
   - 
   - 
   - 
@@ -53,6 +53,9 @@ TagManager:
   - name: Player
     uniqueID: 2756489459
     locked: 0
-  - name: PixelUI
+  - name: Girlfriend
     uniqueID: 608217287
+    locked: 0
+  - name: PixelUI
+    uniqueID: 38071529
     locked: 0

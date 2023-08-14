@@ -5,7 +5,7 @@ using UnityEngine;
 public class GirlfriendTurnState : State
 {
     private Girlfriend girlfriend;
-    private float turnTimer = 0.5f;
+    private float turnTimer = 1f;
     private Vector2 previousDirection;
 
     public GirlfriendTurnState(Girlfriend girlfriend, StateMachine stateMachine, string animBoolName) : base(girlfriend, stateMachine, animBoolName)
@@ -44,6 +44,7 @@ public class GirlfriendTurnState : State
         {
             girlfriend.FaceDirection(Vector2.left);
         }
+        girlfriend.StartCoroutine(JumpCoroutine());
     }
 
     private IEnumerator JumpCoroutine()

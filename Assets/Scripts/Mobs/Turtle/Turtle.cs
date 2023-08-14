@@ -27,6 +27,8 @@ public class Turtle : Platform
 
     protected override void Update()
     {
-        base.Update();        
+        base.Update();
+
+        StateMachine.CurrentState.Update();
     }
 }

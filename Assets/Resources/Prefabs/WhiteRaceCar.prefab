@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1691674534418886712}
   - component: {fileID: 3178542805834993994}
   - component: {fileID: 6007196385434156833}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WhiteRaceCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

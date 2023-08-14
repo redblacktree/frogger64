@@ -24,13 +24,15 @@ public class Girlfriend : Entity
     protected override void Start()
     {
         base.Start();
-        Debug.Log("Girlfriend Start");
+        
         StateMachine.Initialize(IdleState);
     }
 
     protected override void Update()
     {
-        base.Update();        
+        base.Update();
+
+        StateMachine.CurrentState.Update();
     }
 
     public Vector2 FacingDirection => transform.rotation.eulerAngles.z == 0 ? Vector2.up : transform.rotation.eulerAngles.z == 180 ? Vector2.down : transform.rotation.eulerAngles.z == 90 ? Vector2.left : Vector2.right;
@@ -39,19 +41,26 @@ public class Girlfriend : Entity
     {
         if (direction == Vector2.up)
         {
-            transform.Rotate(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (direction == Vector2.down)
         {
-            transform.Rotate(0, 0, 180);
+            transform.rotation = Quaternion.Euler(0, 0, 180);            
         }
         else if (direction == Vector2.left)
         {
-            transform.Rotate(0, 0, 90);
+            transform.rotation = Quaternion.Euler(0, 0, 90);            
         }
         else if (direction == Vector2.right)
         {
-            transform.Rotate(0, 0, -90);
+            transform.rotation = Quaternion.Euler(0, 0, 270);            
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Girlfriend Collided with Player");
         }
     }
 }
