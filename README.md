@@ -3,6 +3,8 @@
 
 MiniFrog is definitely not Frogger. Please don't sue me Konami, it's just a game jam.
 
+Play in your browser on [itch.io](https://redblacktree.itch.io/minifrog).
+
 Made in 2 weeks for LOWREZGAMEJAM 2023.
 ### Controls
 ASDW or Arrow Keys
