@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    public float jumpSpeed = 5f;
+    public float JumpSpeed = 5f;
 
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }

@@ -34,7 +34,7 @@ public class PlayerJumpState : PlayerState
 
         if (Vector2.Distance(player.transform.position, TargetPosition) > 0.1f)
         {
-            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetPosition, player.jumpSpeed * Time.deltaTime);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, TargetPosition, player.JumpSpeed * Time.deltaTime);
         }        
         else
         {
