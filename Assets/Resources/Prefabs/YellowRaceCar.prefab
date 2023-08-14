@@ -56,9 +56,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1121515219, guid: 9409960205f914c44898e43503213b5b, type: 3}
+    - target: {fileID: 3178542805834993994, guid: b72d0750777badd499bf29fc4745d823, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4657586006010460121, guid: b72d0750777badd499bf29fc4745d823, type: 3}
       propertyPath: m_Name
-      value: YellowRaceCar Variant
+      value: YellowRaceCar
       objectReference: {fileID: 0}
     - target: {fileID: 4657586006010460121, guid: b72d0750777badd499bf29fc4745d823, type: 3}
       propertyPath: m_IsActive
