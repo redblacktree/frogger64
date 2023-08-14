@@ -12,7 +12,6 @@ public class Mob : Entity
     {
         base.Start();
 
-        Debug.Log($"Mob Start {gameObject.name} MoveDirection {MoveDirection}");
         FlipSprite(new Vector2(MoveDirection, 0));
     }
 
