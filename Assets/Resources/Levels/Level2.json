@@ -1,7 +1,7 @@
 {
     "Spawners": [
         {
-            "Speed": 1.5,
+            "Speed": 1.75,
             "Mobs": [
                 {
                     "Type": "TurtleGroup",
@@ -19,20 +19,24 @@
             ]
         },
         {
-            "Speed": 1.0,
+            "Speed": 1.75,
             "Mobs": [
+                {
+                    "Type": "Log",
+                    "Spacing": 6
+                },
                 {
                     "Type": "Log",
                     "Spacing": 8
                 },
                 {
-                    "Type": "Log",
+                    "Type": "Gator",
                     "Spacing": 6
                 }
             ]
         },        
         {
-            "Speed": 1.5,
+            "Speed": 2,
             "Mobs": [
                 {
                     "Type": "PinkCar",
@@ -41,7 +45,7 @@
             ]
         },
         {
-            "Speed": 2,
+            "Speed": 3,
             "Mobs": [
                 {
                     "Type": "WhiteRaceCar",

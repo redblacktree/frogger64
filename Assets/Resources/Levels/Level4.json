@@ -1,7 +1,7 @@
 {
     "Spawners": [
         {
-            "Speed": 1.5,
+            "Speed": 2,
             "Mobs": [
                 {
                     "Type": "TurtleGroup",
@@ -14,34 +14,39 @@
                 },
                 {
                     "Type": "TurtleGroup",
-                    "Spacing": 6
+                    "Spacing": 6,
+                    "Dives": true
                 }
             ]
         },
         {
-            "Speed": 1.0,
+            "Speed": 1.5,
             "Mobs": [
+                {
+                    "Type": "Log",
+                    "Spacing": 6
+                },
                 {
                     "Type": "Log",
                     "Spacing": 8
                 },
                 {
-                    "Type": "Log",
+                    "Type": "Gator",
                     "Spacing": 6
                 }
             ]
         },        
         {
-            "Speed": 1.5,
+            "Speed": 2,
             "Mobs": [
                 {
-                    "Type": "PinkCar",
+                    "Type": "Truck",
                     "Spacing": 6
                 }
             ]
         },
         {
-            "Speed": 2,
+            "Speed": 6,
             "Mobs": [
                 {
                     "Type": "WhiteRaceCar",
@@ -54,10 +59,10 @@
             ]
         },
         {
-            "Speed": 0.75,
+            "Speed": 1,
             "Mobs": [
                 {
-                    "Type": "StreetSweeper",
+                    "Type": "PinkCar",
                     "Spacing": 5.5
                 }
             ]

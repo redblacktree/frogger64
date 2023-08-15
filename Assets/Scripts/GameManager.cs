@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     private int livesRemaining  = 0;
     private int score = 0;
     private int highScore = 4630;
+    private int currentLevel = 1;
+    private int numberOfLevels = 4;
 
     private void Awake()
     {
@@ -163,7 +165,11 @@ public class GameManager : MonoBehaviour
     public IEnumerator LoadNextLevelCoroutine()
     {
         yield return new WaitForSeconds(newLevelLoadDelay);
-        LoadLevel(1); // TODO: Replace hard-coded level number
+        if (currentLevel < numberOfLevels)
+        {
+            currentLevel++;
+        }        
+        LoadLevel(currentLevel);
     }
 
     public void LoadLevel(int level)

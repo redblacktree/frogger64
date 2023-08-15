@@ -29,7 +29,15 @@ public class HomeSquare : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.PlayerHome();
+            if (Occupied)
+            {
+                GameManager.Instance.Player.Die();
+            }
+            else
+            {
+                GameManager.Instance.PlayerHome();
+            }
+            Occupy();
         }
     }
 }
