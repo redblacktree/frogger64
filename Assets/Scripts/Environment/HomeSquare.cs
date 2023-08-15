@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HomeSquare : MonoBehaviour
 {
-    public bool Occupied { get; private set; } = false;
+    public bool Occupied = false;
     public Vector2 HomeLocation;
     private Fly fly;
 
@@ -29,6 +29,8 @@ public class HomeSquare : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player entered home square at pos:" + HomeLocation);
+            Debug.Log("Player entered home square at pos:" + gameObject.transform.position);
             if (Occupied)
             {
                 GameManager.Instance.Player.Die();
@@ -36,8 +38,8 @@ public class HomeSquare : MonoBehaviour
             else
             {
                 GameManager.Instance.PlayerHome();
+                Occupy();
             }
-            Occupy();
         }
     }
 }
