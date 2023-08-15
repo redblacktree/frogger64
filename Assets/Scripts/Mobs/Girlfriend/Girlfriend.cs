@@ -71,7 +71,6 @@ public class Girlfriend : Entity
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Girlfriend Collided with Player");
             HopOnPlayersBack(other.gameObject);
         }
     }

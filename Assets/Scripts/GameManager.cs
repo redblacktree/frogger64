@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public int ScoreForEatingFly = 200;
     public int ScorePerSecondRemaining = 10;
 
+    [Header("Girlfriend")]
+    public float GirlfriendAppearanceFrequency = 0.2f;
+
     [Header("Player Data")]
     [SerializeField] private Vector2 playerSpawnPoint = new Vector2(3.5f, -4f);
     [SerializeField] private int lives = 6;
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Player Player { get; private set; }
+    public Girlfriend Girlfriend { get; set; }
     private LevelData levelData;    
     public float TimeRemaining { get; private set; } = 0f;
     private bool TimerStopped = false;

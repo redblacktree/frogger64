@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RiverHazard : MonoBehaviour
+public class GatorMouth : MonoBehaviour
 {
+     public bool IsDeadly = true;
+
     private void OnTriggerStay2D(Collider2D other) 
     {
-        if (other.CompareTag("Player"))
+        if (IsDeadly && other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (!player.Riding && !player.Jumping)
+            if (!player.Jumping)
             {
                 player.Die();
             }

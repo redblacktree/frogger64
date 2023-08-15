@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Log : Platform
 {
-    private float girlfriendSpawnRate = 1f;
-
     protected override void Start()
     {
         base.Start();
 
-        if (Random.Range(0f, 1f) < girlfriendSpawnRate)
+        if (Random.Range(0f, 1f) < GameManager.Instance.GirlfriendAppearanceFrequency)
         {
-            SpawnGirlfriend();
+            // if no girlfriend, spawn one
+            if (GameManager.Instance.Girlfriend == null)
+            {
+                GameManager.Instance.Girlfriend = SpawnGirlfriend();
+            }
         }
     }
 
-    private void SpawnGirlfriend()
+    private Girlfriend SpawnGirlfriend()
     {
         GameObject gameObject = Instantiate(Resources.Load<GameObject>("Prefabs/Girlfriend"));
         Girlfriend girlfriend = gameObject.GetComponent<Girlfriend>();
         girlfriend.transform.position = transform.position + new Vector3(0, 0, 0);
         girlfriend.FaceDirection(Vector2.right);
         girlfriend.transform.parent = transform;
+
+        return girlfriend;
     }
 }
